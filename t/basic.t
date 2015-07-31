@@ -10,6 +10,10 @@ done_testing;
 exit;
 
 sub run {
+    TODO: {
+        local $TODO = "tests need to be implemented";
+        ok 0;
+    }
 
     return;
 }
