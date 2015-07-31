@@ -1,5 +1,5 @@
 {
-   "abstract" : "#",
+   "abstract" : "gantry to hang a model layer onto Dancer2",
    "author" : [
       "Christian Walde <walde.christian@gmail.com>"
    ],
@@ -43,6 +43,12 @@
       },
       "runtime" : {
          "requires" : {
+            "Dancer2" : "0",
+            "Dancer2::Plugin" : "0",
+            "Dancer2::Plugin::AppRole::Helper" : "0",
+            "Module::Runtime" : "0",
+            "Moo::Role" : "0",
+            "Types::Standard" : "0",
             "perl" : "5.006",
             "strictures" : "2"
          }
@@ -62,9 +68,13 @@
       }
    },
    "provides" : {
+      "Dancer2::Plugin::AppRole::Model" : {
+         "file" : "lib/Dancer2/Plugin/AppRole/Model.pm",
+         "version" : "1.152120"
+      },
       "Dancer2::Plugin::Model" : {
          "file" : "lib/Dancer2/Plugin/Model.pm",
-         "version" : "0.000001"
+         "version" : "1.152120"
       }
    },
    "release_status" : "stable",
@@ -80,6 +90,6 @@
          "web" : "https://github.com/wchristian/Dancer2-Plugin-Model"
       }
    },
-   "version" : "0.000001"
+   "version" : "1.152120"
 }
 

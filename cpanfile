@@ -1,3 +1,9 @@
+requires "Dancer2" => "0";
+requires "Dancer2::Plugin" => "0";
+requires "Dancer2::Plugin::AppRole::Helper" => "0";
+requires "Module::Runtime" => "0";
+requires "Moo::Role" => "0";
+requires "Types::Standard" => "0";
 requires "perl" => "5.006";
 requires "strictures" => "2";
 

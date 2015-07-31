@@ -2,11 +2,57 @@
 
 =head1 NAME
 
-Dancer2::Plugin::Model
+Dancer2::Plugin::Model - gantry to hang a model layer onto Dancer2
 
 =head1 VERSION
 
-version 0.000001
+version 1.152120
+
+=head1 SYNOPSIS
+
+In your app:
+
+    package My;
+    use Dancer2;
+    use Dancer2::Plugin::Model;
+    
+    configure_model db => make_db();
+    set_model;
+    
+    any '/' => sub {
+        template 'index', { news => model( "News" )->get_latest };
+    };
+
+In the model factory:
+
+    package My::Model;
+    
+    use Module::Runtime 'use_module';
+    use Moo;
+    
+    has db => is => ro => required => 1;
+    
+    sub get {
+        my ( $self, $entity_name ) = @_;
+        use_module( __PACKAGE__ . "::$entity_name" )->new( db => $self->db );
+    }
+
+In the model entity:
+
+    package My::Model;
+    
+    use Moo;
+    
+    has db => is => ro => required => 1;
+    
+    sub get_latest {
+        my ( $self ) = @_;
+        
+        $self->db->search(
+            "events",
+            where => { event => 'New' }, sort => { date  => -1 }, per_page => 5,
+        );
+    }
 
 =for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders metacpan
 
