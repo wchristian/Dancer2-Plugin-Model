@@ -2,7 +2,6 @@ package Dancer2::Plugin::Model;
 
 use strictures 2;
 
-use Dancer2;
 use Dancer2::Plugin;
 
 use Dancer2::Plugin::AppRole::Helper;
@@ -44,7 +43,7 @@ In the model factory:
 
 In the model entity:
 
-    package My::Model;
+    package My::Model::News;
     
     use Moo;
     
@@ -63,18 +62,17 @@ In the model entity:
 
 on_plugin_import { ensure_approle_s Model => @_ };
 
-register model => sub {
-    my ( $dsl, $model ) = @_;
-    return $dsl->app->model->get( $model );
-};
-
-register set_model => sub {
-    my ( $dsl, $model ) = @_;
-    return $dsl->app->model( $model ? $model : () );
-};
-
-register configure_model => sub { shift->app->model_args( {@_} ) };
-
-register_plugin;
+plugin_keywords
+    model => sub {
+        my ( $dsl, $model ) = @_;
+        return $dsl->app->model->get( $model );
+    },
+    set_model => sub {
+        my ( $dsl, $model ) = @_;
+        return $dsl->app->model( $model ? $model : () );
+    },
+    configure_model => sub {
+        return shift->app->model_args( {@_} );
+    };
 
 1;
