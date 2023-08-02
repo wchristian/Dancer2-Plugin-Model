@@ -43,7 +43,7 @@ In the model factory:
 
 In the model entity:
 
-    package My::Model;
+    package My::Model::News;
     
     use Moo;
     
